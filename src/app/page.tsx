@@ -1,3 +1,8 @@
+import { db } from "~/server/db";
+import { posts } from "~/server/db/schema";
+
+export const dynamic = "force-dynamic";
+
 const mockImageURLs = [
   "https://utfs.io/f/bbf968e5-3d64-4dfd-9dac-c7b04272a457-1ez072.png",
   "https://utfs.io/f/85249d85-2c22-4545-8582-78ddba88b3a5-170x77.png",
@@ -9,7 +14,10 @@ const mockImages = mockImageURLs.map((url, index) => ({
   url,
 }));
 
-export default function HomePage() {
+export default async function HomePage() {
+  const postsData = await db.select().from(posts);
+
+  console.log(postsData);
   return (
     <main className="">
       <div className="flex flex-wrap gap-4">
