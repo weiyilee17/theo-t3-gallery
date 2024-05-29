@@ -1,16 +1,14 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { desc } from "drizzle-orm";
-import { db } from "~/server/db";
-import { images } from "~/server/db/schema";
+import { getMyImages } from "~/server/queries";
 
 export const dynamic = "force-dynamic";
 
 async function Images() {
-  const imagesData = await db.select().from(images).orderBy(desc(images.id));
+  const images = await getMyImages();
 
   return (
     <div className="flex flex-wrap gap-4">
-      {imagesData.map(({ id, url, name }) => (
+      {images.map(({ id, url, name }) => (
         <div key={id} className="flex w-48 flex-col">
           <img src={url} alt="" className="aspect-video w-full object-cover" />
           <div>{name}</div>
