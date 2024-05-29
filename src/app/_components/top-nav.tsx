@@ -3,6 +3,7 @@
 
 import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import UploadButtonClient from "./upload-button-client";
 
 export default async function TopNav() {
   // const user = await currentUser();
@@ -57,11 +58,17 @@ export default async function TopNav() {
         fixes itself in the future and we want to change to use clerk, we can write it this way.
         
         */}
-        {(await isAuthenticated()) ? (
-          <LogoutLink>Logout</LogoutLink>
-        ) : (
-          <LoginLink>Sign in</LoginLink>
-        )}
+
+        <div className="flex flex-row">
+          {(await isAuthenticated()) ? (
+            <>
+              <UploadButtonClient />
+              <LogoutLink>Logout</LogoutLink>
+            </>
+          ) : (
+            <LoginLink>Sign in</LoginLink>
+          )}
+        </div>
       </div>
     </nav>
   );
