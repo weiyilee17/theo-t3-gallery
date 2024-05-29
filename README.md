@@ -9,8 +9,8 @@
 - [x] Attach database to UI
 - [ ] Add authentication (w/ clerk)
 - [x] Add authentication (w/ kinde) (clerk didn't work, don't know why)
-- [ ] Add image upload
-- [ ] 'taint' (server-only)
+- [x] Add image upload
+- [x] 'taint' (server-only) (taint is removing sensitive data that might be passed to the client)
 - [ ] Use Next/Image component
 - [ ] Error management (w/ Sentry)
 - [ ] Routing/image page (parallel route)
