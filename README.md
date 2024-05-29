@@ -11,7 +11,7 @@
 - [x] Add authentication (w/ kinde) (clerk didn't work, don't know why)
 - [x] Add image upload
 - [x] 'taint' (server-only) (taint is removing sensitive data that might be passed to the client)
-- [ ] Use Next/Image component
+- [x] Use Next/Image component
 - [ ] Error management (w/ Sentry)
 - [ ] Routing/image page (parallel route)
 - [ ] Delete button (w/ Server Actions)
