@@ -34,8 +34,10 @@ export default async function TopNav() {
 
         The token could be successfully decoded in jwt's website, so not sure what is wrong about the jwt form. The UserButton gets my data, and shows my github profile image. My clerk's dashboard also shows my github account has successfully signed in, but no user because jwt token invalid.
 
-        I personally think this is a bug on app router. I've tried to downgrade my next, clerk to Theo's version, but the result is still the same. Another possibility is pnpm. I'm using v9 and Theo is using v8.
+        I personally think this is a bug on app router. In clerk's templates, it is not using src folder and so the app folder is at the root.
         
+        I've tried to downgrade my next, clerk to Theo's version, but the result is still the same. Another possibility is pnpm. I'm using v9 and Theo is using v8.
+
         */}
 
         {/* <SignedOut>
@@ -45,7 +47,16 @@ export default async function TopNav() {
         <UserButton />
         </SignedIn> */}
 
-        {/* Using kinde to follow the tutorial */}
+        {/* Using kinde to follow the tutorial. It doesn't work as the clerk way though. I think it is because the way the matcher in
+        the middleware is written? 
+        
+        The home page is protected, and after logout, it redirects to the homepage, so if you are not logged
+        in, you would be redirected to the login page; if you are logged in, you would see logout.
+
+        Could write all the application assuming the user logged in, since the middleware blocks un authed users, but in case clerk
+        fixes itself in the future and we want to change to use clerk, we can write it this way.
+        
+        */}
         {(await isAuthenticated()) ? (
           <LogoutLink>Logout</LogoutLink>
         ) : (
