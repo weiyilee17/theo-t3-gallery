@@ -1,6 +1,8 @@
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Image from "next/image";
+import Link from "next/link";
 import { getMyImages } from "~/server/queries";
+
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export const dynamic = "force-dynamic";
 
@@ -10,14 +12,16 @@ async function Images() {
   return (
     <div className="flex flex-wrap justify-center gap-4">
       {images.map(({ id, url, name }) => (
-        <div key={id} className="flex w-48 flex-col">
-          <Image
-            src={url}
-            alt={name}
-            width={480}
-            height={480}
-            className="aspect-video object-contain"
-          />
+        <div key={id} className="flex size-48 flex-col">
+          <Link href={`/img/${id}`} passHref>
+            <Image
+              src={url}
+              alt={name}
+              width={192}
+              height={192}
+              className="aspect-video object-contain"
+            />
+          </Link>
           <div>{name}</div>
         </div>
       ))}
