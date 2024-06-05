@@ -4,33 +4,35 @@ import { desc, eq } from "drizzle-orm";
 
 import { db } from "./db";
 import { images } from "./db/schema";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { auth } from "@clerk/nextjs/server";
+// import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-const { getUser } = getKindeServerSession();
+// const { getUser } = getKindeServerSession();
 
 export async function getMyImages() {
-  const user = await getUser();
+  // const user = await getUser();
+  const user = auth();
 
   // my email for gmail and github are the same, so the user id are the same.
   // should test with different accounts
 
-  if (!user?.id) {
+  if (!user.userId) {
     throw new Error("Unauthorized");
   }
 
   const imagesData = await db
     .select()
     .from(images)
-    .where(eq(images.userId, user.id))
+    .where(eq(images.userId, user.userId))
     .orderBy(desc(images.id));
 
   return imagesData;
 }
 
 export async function getImage(id: number) {
-  const user = await getUser();
+  const user = auth();
 
-  if (!user?.id) {
+  if (!user.userId) {
     throw new Error("Unauthorized");
   }
 
@@ -44,7 +46,7 @@ export async function getImage(id: number) {
     throw new Error("Image not found");
   }
 
-  if (image.userId !== user.id) {
+  if (image.userId !== user.userId) {
     throw new Error("Unauthorized");
   }
 

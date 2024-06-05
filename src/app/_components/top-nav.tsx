@@ -1,15 +1,15 @@
-// import { SignInButton, UserButton } from "@clerk/nextjs";
+import { SignInButton, UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
 // import { currentUser } from "@clerk/nextjs/server";
 
-import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+// import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+// import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import UploadButtonClient from "./upload-button-client";
 
 export default async function TopNav() {
   // const user = await currentUser();
   // console.log("🚀 ~ TopNav ~ user:", user);
 
-  const { isAuthenticated } = getKindeServerSession();
+  // const { isAuthenticated } = getKindeServerSession();
 
   return (
     <nav className="flex w-full items-center justify-between border-b p-4 text-xl font-semibold">
@@ -39,14 +39,18 @@ export default async function TopNav() {
         
         I've tried to downgrade my next, clerk to Theo's version, but the result is still the same. Another possibility is pnpm. I'm using v9 and Theo is using v8.
 
-        */}
+        // Not sure why clerk works again, but since it does, I'll move back to clerk
 
-        {/* <SignedOut>
-        <SignInButton />
-        </SignedOut>
-        <SignedIn>
-        <UserButton />
-        </SignedIn> */}
+        */}
+        <div className="flex flex-row items-center gap-4">
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          <SignedIn>
+            <UploadButtonClient />
+            <UserButton />
+          </SignedIn>
+        </div>
 
         {/* Using kinde to follow the tutorial. It doesn't work as the clerk way though. I think it is because the way the matcher in
         the middleware is written? 
@@ -59,7 +63,7 @@ export default async function TopNav() {
         
         */}
 
-        <div className="flex flex-row">
+        {/* <div className="flex flex-row">
           {(await isAuthenticated()) ? (
             <>
               <UploadButtonClient />
@@ -68,7 +72,7 @@ export default async function TopNav() {
           ) : (
             <LoginLink>Sign in</LoginLink>
           )}
-        </div>
+        </div> */}
       </div>
     </nav>
   );

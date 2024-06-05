@@ -1,8 +1,9 @@
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { getMyImages } from "~/server/queries";
 
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+// import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export const dynamic = "force-dynamic";
 
@@ -32,17 +33,25 @@ async function Images() {
 }
 
 export default async function HomePage() {
-  const { isAuthenticated } = getKindeServerSession();
+  // const { isAuthenticated } = getKindeServerSession();
 
   return (
     <main className="">
-      {(await isAuthenticated()) ? (
+      <SignedOut>
+        <div className="size-full text-center text-2xl">
+          Please sign in above
+        </div>
+      </SignedOut>
+      <SignedIn>
+        <Images />
+      </SignedIn>
+      {/* {(await isAuthenticated()) ? (
         <Images />
       ) : (
         <div className="size-full text-center text-2xl">
           Please sign in above
         </div>
-      )}
+      )} */}
     </main>
   );
 }
