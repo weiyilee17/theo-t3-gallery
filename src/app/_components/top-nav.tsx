@@ -4,6 +4,7 @@ import { SignInButton, UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
 // import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 // import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import UploadButtonClient from "./upload-button-client";
+import SimpleUploadButton from "./simple-upload-button";
 
 export default async function TopNav() {
   // const user = await currentUser();
@@ -47,7 +48,7 @@ export default async function TopNav() {
             <SignInButton />
           </SignedOut>
           <SignedIn>
-            <UploadButtonClient />
+            <SimpleUploadButton />
             <UserButton />
           </SignedIn>
         </div>
