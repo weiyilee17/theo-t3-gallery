@@ -3,35 +3,35 @@ name: CI
 on: [push, pull_request]
 
 env:
-  POSTGRES_URL: "placeholder text"
-  POSTGRES_PRISMA_URL: "placeholder text"
-  POSTGRES_URL_NO_SSL: "placeholder text"
-  POSTGRES_URL_NON_POOLING: "placeholder text"
-  POSTGRES_USER: "placeholder text"
-  POSTGRES_HOST: "placeholder text"
-  POSTGRES_PASSWORD: "placeholder text"
-  POSTGRES_DATABASE: "placeholder text"
+  POSTGRES_URL: "https://fake.com"
+  POSTGRES_PRISMA_URL: "https://fake.com"
+  POSTGRES_URL_NO_SSL: "https://fake.com"
+  POSTGRES_URL_NON_POOLING: "https://fake.com"
+  POSTGRES_USER: "placeholder_text"
+  POSTGRES_HOST: "placeholder_text"
+  POSTGRES_PASSWORD: "placeholder_text"
+  POSTGRES_DATABASE: "placeholder_text"
 
-  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "placeholder text"
-  CLERK_SECRET_KEY: "placeholder text"
+  NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "placeholder_text"
+  CLERK_SECRET_KEY: "placeholder_text"
 
-  KINDE_CLIENT_ID: "placeholder text"
-  KINDE_CLIENT_SECRET: "placeholder text"
-  KINDE_ISSUER_URL: "placeholder text"
-  KINDE_SITE_URL: "placeholder text"
-  KINDE_POST_LOGOUT_REDIRECT_URL: "placeholder text"
-  KINDE_POST_LOGIN_REDIRECT_URL: "placeholder text"
+  KINDE_CLIENT_ID: "placeholder_text"
+  KINDE_CLIENT_SECRET: "placeholder_text"
+  KINDE_ISSUER_URL: "https://fake.com"
+  KINDE_SITE_URL: "https://fake.com"
+  KINDE_POST_LOGOUT_REDIRECT_URL: "https://fake.com"
+  KINDE_POST_LOGIN_REDIRECT_URL: "https://fake.com"
 
-  UPLOADTHING_SECRET: "placeholder text"
-  UPLOADTHING_APP_ID: "placeholder text"
+  UPLOADTHING_SECRET: "placeholder_text"
+  UPLOADTHING_APP_ID: "placeholder_text"
 
-  SENTRY_AUTH_TOKEN: "placeholder text"
+  SENTRY_AUTH_TOKEN: "placeholder_text"
 
-  NEXT_PUBLIC_POSTHOG_KEY: "placeholder text"
-  NEXT_PUBLIC_POSTHOG_HOST: "placeholder text"
+  NEXT_PUBLIC_POSTHOG_KEY: "placeholder_text"
+  NEXT_PUBLIC_POSTHOG_HOST: "https://fake.com"
 
-  UPSTASH_REDIS_REST_URL: "placeholder text"
-  UPSTASH_REDIS_REST_TOKEN: "placeholder text"
+  UPSTASH_REDIS_REST_URL: "https://fake.com"
+  UPSTASH_REDIS_REST_TOKEN: "placeholder_text"
 
 jobs:
   build:
