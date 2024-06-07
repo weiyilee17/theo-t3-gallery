@@ -8,6 +8,9 @@ export function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const dialogRef = useRef<ElementRef<"dialog">>(null);
 
+  // TODO: after deleting image, clicking the image would update the url, but not show the modal
+  // might be related to refs?
+
   useEffect(() => {
     if (!dialogRef.current?.open) {
       dialogRef.current?.showModal();

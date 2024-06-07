@@ -4,6 +4,7 @@ import { UploadThingError } from "uploadthing/server";
 // import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { db } from "~/server/db";
 import { images } from "~/server/db/schema";
+import { ratelimit } from "~/server/ratelimit";
 
 // const { getUser } = getKindeServerSession();
 
@@ -23,6 +24,12 @@ export const ourFileRouter = {
       if (!user.userId) throw new UploadThingError("Unauthorized");
 
       const { userId } = user;
+
+      const { success } = await ratelimit.limit(userId);
+
+      if (!success) {
+        throw new UploadThingError("Ratelimited");
+      }
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       // return { userId: user.id };
