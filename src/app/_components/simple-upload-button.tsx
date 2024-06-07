@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { usePostHog } from "posthog-js/react";
 import type { ChangeEvent } from "react";
 import { toast } from "sonner";
 import { useUploadThing } from "~/utils/uploadthing";
@@ -76,29 +77,31 @@ const useUploadThingInputProps = (...args: Input) => {
 export default function SimpleUploadButton() {
   const router = useRouter();
 
-  const { inputProps, isUploading } = useUploadThingInputProps(
-    "imageUploader",
-    {
-      onUploadBegin() {
-        toast(
-          <div className="flex gap-2 text-white">
-            <LoadingSpinnerSVG />
-            <span className="items-center text-lg">Uploading...</span>
-          </div>,
-          {
-            duration: 100_000,
-            id: "upload-begin",
-          },
-        );
-      },
-      onClientUploadComplete() {
-        toast.dismiss("upload-begin");
-        toast("Upload complete!");
+  const posthog = usePostHog();
 
-        router.refresh();
-      },
+  const { inputProps } = useUploadThingInputProps("imageUploader", {
+    onUploadBegin() {
+      // Would be seen in Data management menu, events tab
+      posthog.capture("upload_begin");
+
+      toast(
+        <div className="flex gap-2 text-white">
+          <LoadingSpinnerSVG />
+          <span className="items-center text-lg">Uploading...</span>
+        </div>,
+        {
+          duration: 100_000,
+          id: "upload-begin",
+        },
+      );
     },
-  );
+    onClientUploadComplete() {
+      toast.dismiss("upload-begin");
+      toast("Upload complete!");
+
+      router.refresh();
+    },
+  });
   return (
     <div>
       <label htmlFor="upload-button" className="cursor-pointer">
