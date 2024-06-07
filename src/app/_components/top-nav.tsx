@@ -6,9 +6,6 @@ import { SignInButton, UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import SimpleUploadButton from "./simple-upload-button";
 
 export default async function TopNav() {
-  // const user = await currentUser();
-  // console.log("🚀 ~ TopNav ~ user:", user);
-
   // const { isAuthenticated } = getKindeServerSession();
 
   return (

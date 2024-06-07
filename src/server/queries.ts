@@ -7,6 +7,7 @@ import { auth } from "@clerk/nextjs/server";
 
 import { db } from "./db";
 import { images } from "./db/schema";
+import analyticsServerClient from "./analytics";
 
 // import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
@@ -66,6 +67,14 @@ export async function deleteImage(id: number) {
   await db
     .delete(images)
     .where(and(eq(images.userId, user.userId), eq(images.id, id)));
+
+  analyticsServerClient.capture({
+    distinctId: user.userId,
+    event: "delete image",
+    properties: {
+      imageId: id,
+    },
+  });
 
   // url changes, not needed
   // revalidatePath("/");
