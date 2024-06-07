@@ -1,6 +1,9 @@
-import { getImage } from "~/server/queries";
+import { deleteImage, getImage } from "~/server/queries";
+
 // import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { clerkClient } from "@clerk/nextjs/server";
+
+import { Button } from "./ui/button";
 
 // const { getUser } = getKindeServerSession();
 
@@ -29,6 +32,20 @@ export default async function FullPageImageView({ id }: { id: number }) {
         <div className="flex flex-col p-2">
           <span>Created On:</span>
           <span>{new Date(image.createdAt).toLocaleDateString()}</span>
+        </div>
+
+        <div className="p-2">
+          <form
+            action={async () => {
+              "use server";
+
+              await deleteImage(id);
+            }}
+          >
+            <Button type="submit" variant="destructive">
+              Delete
+            </Button>
+          </form>
         </div>
       </div>
     </div>
