@@ -1,3 +1,5 @@
+import "server-only";
+
 // app/posthog.js
 import { PostHog } from "posthog-node";
 
