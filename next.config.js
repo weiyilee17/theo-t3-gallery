@@ -12,9 +12,6 @@ const coreConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
 
   // posthog
   async rewrites() {
