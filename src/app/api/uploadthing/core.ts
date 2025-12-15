@@ -18,14 +18,16 @@ export const ourFileRouter = {
     .middleware(async () => {
       // This code runs on your server before upload
       // const user = await getUser();
-      const user = auth();
+      const user = await auth();
 
       // If you throw, the user will not be able to upload
       if (!user.userId) throw new UploadThingError("Unauthorized");
 
       const { userId } = user;
 
-      const fullUserData = await clerkClient.users.getUser(userId);
+      const cClient = await clerkClient();
+
+      const fullUserData = await cClient.users.getUser(userId);
 
       // can-upload can be set on clerk's user menu, private section
       if (fullUserData.privateMetadata?.["can-upload"] !== true) {

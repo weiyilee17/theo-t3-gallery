@@ -16,7 +16,7 @@ import { images } from "./db/schema";
 
 export async function getMyImages() {
   // const user = await getUser();
-  const user = auth();
+  const user = await auth();
 
   // my email for gmail and github are the same, so the user id are the same.
   // should test with different accounts
@@ -35,7 +35,7 @@ export async function getMyImages() {
 }
 
 export async function getImage(id: number) {
-  const user = auth();
+  const user = await auth();
 
   if (!user.userId) {
     throw new Error("Unauthorized");
@@ -59,7 +59,7 @@ export async function getImage(id: number) {
 }
 
 export async function deleteImage(id: number) {
-  const user = auth();
+  const user = await auth();
 
   if (!user.userId) {
     throw new Error("Unauthorized");

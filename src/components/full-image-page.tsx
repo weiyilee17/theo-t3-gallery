@@ -12,7 +12,10 @@ export default async function FullPageImageView({ id }: { id: number }) {
 
   // The purpose of using this is when this is public, non-logged in viewers can still see the uploader's name
   // however, kinde doesn't support such an api
-  const uploaderInfo = await clerkClient.users.getUser(image.userId);
+
+  const cClient = await clerkClient();
+
+  const uploaderInfo = await cClient.users.getUser(image.userId);
 
   return (
     <div className="flex h-full w-full min-w-0 ">
