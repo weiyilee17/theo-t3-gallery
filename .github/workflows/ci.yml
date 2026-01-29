@@ -22,8 +22,7 @@ env:
   KINDE_POST_LOGOUT_REDIRECT_URL: "https://fake.com"
   KINDE_POST_LOGIN_REDIRECT_URL: "https://fake.com"
 
-  UPLOADTHING_SECRET: "placeholder_text"
-  UPLOADTHING_APP_ID: "placeholder_text"
+  UPLOADTHING_TOKEN: "placeholder_text"
 
   SENTRY_AUTH_TOKEN: "placeholder_text"
 
