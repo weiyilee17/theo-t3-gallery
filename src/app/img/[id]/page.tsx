@@ -12,5 +12,5 @@ export default async function PhotoPage({
     throw new Error("Invalid photo id");
   }
 
-  return <FullPageImageView id={idAsNumber} />;
+  return <FullPageImageView id={idAsNumber} dismiss="replace" />;
 }

@@ -1,13 +1,18 @@
-import { deleteImage, getImage } from "~/server/queries";
+import { DeleteImageButton } from "~/components/delete-image-button";
+import { getImage } from "~/server/queries";
 
 // import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { clerkClient } from "@clerk/nextjs/server";
 
-import { Button } from "./ui/button";
-
 // const { getUser } = getKindeServerSession();
 
-export default async function FullPageImageView({ id }: { id: number }) {
+export default async function FullPageImageView({
+  id,
+  dismiss,
+}: {
+  id: number;
+  dismiss: "back" | "replace";
+}) {
   const image = await getImage(id);
 
   // The purpose of using this is when this is public, non-logged in viewers can still see the uploader's name
@@ -38,17 +43,7 @@ export default async function FullPageImageView({ id }: { id: number }) {
         </div>
 
         <div className="p-2">
-          <form
-            action={async () => {
-              "use server";
-
-              await deleteImage(id);
-            }}
-          >
-            <Button type="submit" variant="destructive">
-              Delete
-            </Button>
-          </form>
+          <DeleteImageButton id={id} dismiss={dismiss} />
         </div>
       </div>
     </div>

@@ -2,7 +2,6 @@ import "server-only";
 
 import { and, desc, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 import { auth } from "@clerk/nextjs/server";
 
@@ -77,7 +76,5 @@ export async function deleteImage(id: number) {
     },
   });
 
-  // url changes, not needed
   revalidatePath("/");
-  redirect("/");
 }

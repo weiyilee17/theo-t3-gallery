@@ -10,6 +10,7 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import TopNav from "./_components/top-nav";
 import { ourFileRouter } from "./api/uploadthing/core";
 import { CSPostHogProvider } from "./_analytics/provider";
+import { DeferredDeleteHandler } from "~/components/deferred-delete-handler";
 
 export const metadata = {
   title: "T3 Gallery",
@@ -44,6 +45,7 @@ export default function RootLayout({
               {modal}
             </div>
             <div id="modal-root" />
+            <DeferredDeleteHandler />
             <Toaster />
           </body>
         </CSPostHogProvider>
