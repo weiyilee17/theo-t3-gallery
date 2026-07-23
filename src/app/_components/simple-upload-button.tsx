@@ -80,7 +80,11 @@ export default function SimpleUploadButton() {
   const posthog = usePostHog();
 
   const { inputProps } = useUploadThingInputProps("imageUploader", {
-    onUploadBegin() {
+    // After the file is selected, it first runs onBeforeUploadBegin, then onUploadBegin
+    // Usually you would do some file processing here. However, if we put the following logic in
+    // onUploadBegin, it will be executed after the file is uploaded, so the user will wait a while,
+    // then sees the loading spinner, which is not ideal. Thus, we put the logic in onBeforeUploadBegin, even though we don't process the files here.
+    onBeforeUploadBegin(files) {
       // Would be seen in Data management menu, events tab
       posthog.capture("upload_begin");
 
@@ -94,6 +98,7 @@ export default function SimpleUploadButton() {
           id: "upload-begin",
         },
       );
+      return files;
     },
     onUploadError(error) {
       posthog.capture("upload_error", { error });
