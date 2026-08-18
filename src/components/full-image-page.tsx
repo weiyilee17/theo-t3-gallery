@@ -3,6 +3,7 @@ import { getImage } from "~/server/queries";
 
 // import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { clerkClient } from "@clerk/nextjs/server";
+import { CloseModalButton } from "./close-modal-button";
 
 // const { getUser } = getKindeServerSession();
 
@@ -31,7 +32,11 @@ export default async function FullPageImageView({
       </div>
 
       <div className="flex flex-shrink-0 flex-grow flex-col border-l">
-        <div className="border-b p-2 text-center text-lg">{image.name}</div>
+        <div className="flex justify-between">
+          <div className="border-b p-2 text-center text-lg">{image.name}</div>
+          <CloseModalButton isModalOpen={dismiss === "back"} />
+        </div>
+
         <div className="flex flex-col p-2">
           <span>Uploaded by:</span>
           <span>{uploaderInfo.fullName}</span>
