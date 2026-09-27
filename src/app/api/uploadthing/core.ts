@@ -1,4 +1,5 @@
 import { auth, clerkClient } from "@clerk/nextjs/server";
+import { waitUntil } from "@vercel/functions";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 // import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
@@ -34,7 +35,9 @@ export const ourFileRouter = {
         throw new UploadThingError("User does not have upload permissions");
       }
 
-      const { success } = await ratelimit.limit(userId);
+      const { success, pending } = await ratelimit.limit(userId);
+
+      waitUntil(pending);
 
       if (!success) {
         throw new UploadThingError("Ratelimited");
