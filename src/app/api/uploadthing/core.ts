@@ -46,6 +46,20 @@ export const ourFileRouter = {
       // This code RUNS ON YOUR SERVER after upload
       console.log("Upload complete for userId:", metadata.userId);
 
+      // Even though file.url is deprecated and should use ufsUrl, but inserting ufsUrl into the
+      // db would change the imageUrl's hostname from utfs.io to {hash}.ufs.sh
+      // without that image remote in next.config.js, the app would crash while loading the
+      // main page.
+
+      // Add the new hostName to nextjs.config.js is a way solving it (compatable).
+      // Another would be changing the code to ufsUrl, and modify entries in the db since
+      // I'm the only user of the app, or just delete all of them since none of them are
+      // actually important.
+
+      // TODO: Change url to ufsUrl and choose one of the options above if nextjs version has
+      // to be bumped up in the future and uploadthing has to match the upgrade as well.
+      //
+      // For now, I'll keep these unchanged
       console.log("file url", file.url);
 
       const { name, url } = file;
