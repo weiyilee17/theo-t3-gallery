@@ -8,7 +8,6 @@
 - [x] Actually set up a database (w/ vercel postgres)
 - [x] Attach database to UI
 - [x] Add authentication (w/ clerk)
-- [x] Add authentication (w/ kinde) <strike>(clerk didn't work, don't know why)</strike>
 - [x] Add image upload
 - [x] 'taint' (server-only) (taint is removing sensitive data that might be passed to the client)
 - [x] Use Next/Image component
