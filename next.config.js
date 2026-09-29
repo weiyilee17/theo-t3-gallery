@@ -54,7 +54,10 @@ const config = withSentryConfig(coreConfig, {
   // This can increase your server load as well as your hosting bill.
   // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
   // side errors will fail.
-  tunnelRoute: "/monitoring",
+  tunnelRoute: "/sentry-tunnel",
+
+  // Upload source maps for readable stack traces
+  authToken: process.env.SENTRY_AUTH_TOKEN,
 
   // Automatically tree-shake Sentry logger statements to reduce bundle size
   webpack: {

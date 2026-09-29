@@ -11,6 +11,9 @@ Sentry.init({
   // Capture 100% in dev, 10% in production
   // Adjust based on your traffic volume
   tracesSampleRate: process.env.NODE_ENV === "development" ? 1.0 : 0.1,
+
+  replaysOnErrorSampleRate: 1.0,
+
   // Enable logs to be sent to Sentry
   enableLogs: true,
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
