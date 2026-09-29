@@ -9,12 +9,7 @@ import analyticsServerClient from "./analytics";
 import { db } from "./db";
 import { images } from "./db/schema";
 
-// import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-
-// const { getUser } = getKindeServerSession();
-
 export async function getMyImages() {
-  // const user = await getUser();
   const user = await auth();
 
   // my email for gmail and github are the same, so the user id are the same.

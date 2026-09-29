@@ -89,3 +89,29 @@ dialog:modal {
     transform: rotate(360deg);
   }
 }
+/* class from https://github.com/vercel/nextgram/blob/main/app/global.css */
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+  border: none;
+  border-radius: 15px; /* Circular shape */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 24px; /* Adjust font size as needed */
+}
+
+.close-button:hover {
+  background-color: #bbb;
+}
+
+.close-button:after {
+  content: "x";
+  color: white;
+}

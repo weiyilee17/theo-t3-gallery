@@ -1,12 +1,10 @@
 import { auth, clerkClient } from "@clerk/nextjs/server";
+import { waitUntil } from "@vercel/functions";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
-// import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { db } from "~/server/db";
 import { images } from "~/server/db/schema";
 import { ratelimit } from "~/server/ratelimit";
-
-// const { getUser } = getKindeServerSession();
 
 const f = createUploadthing();
 
@@ -17,7 +15,6 @@ export const ourFileRouter = {
     // Set permissions and file types for this FileRoute
     .middleware(async () => {
       // This code runs on your server before upload
-      // const user = await getUser();
       const user = await auth();
 
       // If you throw, the user will not be able to upload
@@ -34,20 +31,35 @@ export const ourFileRouter = {
         throw new UploadThingError("User does not have upload permissions");
       }
 
-      const { success } = await ratelimit.limit(userId);
+      const { success, pending } = await ratelimit.limit(userId);
+
+      waitUntil(pending);
 
       if (!success) {
         throw new UploadThingError("Ratelimited");
       }
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
-      // return { userId: user.id };
       return { userId };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
       console.log("Upload complete for userId:", metadata.userId);
 
+      // Even though file.url is deprecated and should use ufsUrl, but inserting ufsUrl into the
+      // db would change the imageUrl's hostname from utfs.io to {hash}.ufs.sh
+      // without that image remote in next.config.js, the app would crash while loading the
+      // main page.
+
+      // Add the new hostName to nextjs.config.js is a way solving it (compatable).
+      // Another would be changing the code to ufsUrl, and modify entries in the db since
+      // I'm the only user of the app, or just delete all of them since none of them are
+      // actually important.
+
+      // TODO: Change url to ufsUrl and choose one of the options above if nextjs version has
+      // to be bumped up in the future and uploadthing has to match the upgrade as well.
+      //
+      // For now, I'll keep these unchanged
       console.log("file url", file.url);
 
       const { name, url } = file;

@@ -1,7 +1,6 @@
 import { DeleteImageButton } from "~/components/delete-image-button";
 import { getImage } from "~/server/queries";
 
-// import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { clerkClient } from "@clerk/nextjs/server";
 import { CloseModalButton } from "./close-modal-button";
 
@@ -15,9 +14,6 @@ export default async function FullPageImageView({
   dismiss: "back" | "replace";
 }) {
   const image = await getImage(id);
-
-  // The purpose of using this is when this is public, non-logged in viewers can still see the uploader's name
-  // however, kinde doesn't support such an api
 
   const cClient = await clerkClient();
 
