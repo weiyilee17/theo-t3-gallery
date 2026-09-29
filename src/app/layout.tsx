@@ -11,6 +11,7 @@ import TopNav from "./_components/top-nav";
 import { ourFileRouter } from "./api/uploadthing/core";
 import { CSPostHogProvider } from "./_analytics/provider";
 import { DeferredDeleteHandler } from "~/components/deferred-delete-handler";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "T3 Gallery",
